@@ -11,7 +11,6 @@ using namespace std;
 class ConfigFile {
   private:
 	string file;
-	
   public:
 	ConfigFile(string filename);
 	int read_int(const string token);
