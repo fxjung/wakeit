@@ -1,71 +1,30 @@
-#include <string>
+/*
+ * readcfg.cpp
+ *
+ *  Created on: 22.12.2010
+ *      Author: Felix Jung <felix.jung@wilhelm-gym.net>
+ */
+
 #include <iostream>
-#include <fstream>
-#include <sstream>
-#include <cstdlib>
 #include <ctime>
-
-using namespace std;
-
-
-class ConfigFile {
-  private:
-	string file;
-  public:
-	ConfigFile(string filename);
-	int read_int(const string token);
-	string read_string(const string token);
-};
+#include "readcfg.h"
 
 void print_time();
 
 int main(int argc, char** argv) {
-	ConfigFile cfg("config.cfg");
-	cout << cfg.read_int("foo") << endl;
-	cout << "wakeonlan " << cfg.read_string("MAC") << endl;
-	print_time();
+	ConfigFile cfg("wakeit.ini");
+
+
+
+	cout << cfg.read_WAKE_WEEKEND() << endl;
+	cout << cfg.read_MODE() << endl;
+	cout << cfg.read_SEND_PACKETS() << endl;
 }
 
 
-ConfigFile::ConfigFile(const string filename) {
-	file = filename;
-}
 
-int ConfigFile::read_int(const string token) {
-	ifstream config(file.c_str());
-	if(!config) {cout << "Error: Cannot open file " << file << endl; return -1;}
-	
-	while(!config.eof()) {
-    	char buf[100] = {0};
-    	string first;
-   		string second;
-    	string content;
 
-    	config.getline(buf, sizeof(buf));
-    	istringstream istr(string(buf), ios_base::out);
-    	istr >> first >> second >> content;
-   		if(first == token) return atoi(content.c_str());
- 	}
- 	return -1;
-}
 
-string ConfigFile::read_string(const string token) {
-	ifstream config(file.c_str());
-	if(!config) {cout << "Error: Cannot open file " << file << endl; return "";}
-	
-	while(!config.eof()) {
-    	char buf[100] = {0};
-    	string first;
-   		string second;
-    	string content;
-
-    	config.getline(buf, sizeof(buf));
-    	istringstream istr(string(buf), ios_base::out);
-    	istr >> first >> second >> content;
-   		if(first == token) return content;
- 	}
- 	return "";
-}
 
 void print_time() {
     time_t Zeitstempel;
