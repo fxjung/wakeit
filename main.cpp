@@ -12,10 +12,12 @@
 void print_time();
 
 int main(int argc, char** argv) {
-	ConfigFile cfg("wakeit.ini");
+	ConfigFile cfg("wakeit.ini", 20);
 
-
-
+	string* mac = cfg.read_MAC();
+	for(int i = 0; mac[i] != ""; i++) {		// Nur so lange das Array ausgeben, bis der Inhalt eines Strings "" lautet, also keine weiteren MACs vorhanden sind.
+		cout << mac[i] << endl;
+	}
 	cout << cfg.read_WAKE_WEEKEND() << endl;
 	cout << cfg.read_MODE() << endl;
 	cout << cfg.read_SEND_PACKETS() << endl;
