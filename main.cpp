@@ -18,6 +18,21 @@ int main(int argc, char** argv) {
 	for(int i = 0; mac[i] != ""; i++) {		// Nur so lange das Array ausgeben, bis der Inhalt eines Strings "" lautet, also keine weiteren MACs vorhanden sind.
 		cout << mac[i] << endl;
 	}
+
+	int** wake = cfg.read_WAKE();
+		for(int i = 0; wake[i][0] != 0; i++) {		// Nur so lange das Array ausgeben, bis der Inhalt eines Strings "" lautet, also keine weiteren MACs vorhanden sind.
+			for(int j = 0; j < 6; j++) {
+				cout << wake[i][j] << endl;
+			}
+	}
+
+	int** no_wake = cfg.read_NO_WAKE();
+		for(int i = 0; no_wake[i][0] != 0; i++) {		// Nur so lange das Array ausgeben, bis der Inhalt eines Strings "" lautet, also keine weiteren MACs vorhanden sind.
+			for(int j = 0; j < 6; j++) {
+				cout << no_wake[i][j] << endl;
+			}
+	}
+
 	cout << cfg.read_WAKE_WEEKEND() << endl;
 	cout << cfg.read_MODE() << endl;
 	cout << cfg.read_SEND_PACKETS() << endl;
