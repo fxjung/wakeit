@@ -105,32 +105,4 @@ int** ConfigFile::read_multi_date(const string token) {
    		}
  	}
  	return multi_date;
-
-}
-
-string ConfigFile::read_MODE() {
-	return read_string("MODE");
-}
-
-int ConfigFile::read_WAKE_WEEKEND() {
-	string input = read_string("WAKE_WEEKEND");
-	if (input == "true") return 1;
-	else if (input == "false") return 0;
-	else return -1;
-}
-
-int** ConfigFile::read_WAKE() {
-	return read_multi_date("WAKE");
-}
-
-int** ConfigFile::read_NO_WAKE() {
-	return read_multi_date("NO_WAKE");
-}
-
-int ConfigFile::read_SEND_PACKETS() {
-	return read_int("SEND_PACKETS");
-}
-
-string* ConfigFile::read_MAC() {
-	return read_multi_string("MAC");
 }

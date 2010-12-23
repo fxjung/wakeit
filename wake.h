@@ -5,6 +5,7 @@
  *      Author: Felix Jung <felix.jung@wilhelm-gym.net>
  */
 #include <string>
+#include <readcfg.h>
 
 #ifndef _WAKE_H_
 #define _WAKE_H_
@@ -13,10 +14,15 @@ using namespace std;
 
 class Wake {
 private:
-	bool wake_enabled;
+	string MODE;
+	bool WAKE_WEEKEND;
+	int** WAKE;
+	int** NO_WAKE;
+	int SEND_PACKETS;
+	string* MAC;
 public:
-	Wake(bool enabled);
-	void wake_mac(string mac);
+	void read_config(ConfigFile& cfg);
+	void wake_mac();
 };
 
 
