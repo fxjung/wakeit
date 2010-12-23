@@ -5,7 +5,7 @@
  *      Author: Felix Jung <felix.jung@wilhelm-gym.net>
  */
 #include <string>
-#include <readcfg.h>
+#include "readcfg.h"
 
 #ifndef _WAKE_H_
 #define _WAKE_H_

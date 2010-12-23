@@ -10,8 +10,8 @@
 
 using namespace std;
 
-void read_config(ConfigFile& cfg) {
-	string weekend = read_string("WAKE_WEEKEND");
+void Wake::read_config(ConfigFile& cfg) {
+	string weekend = cfg.read_string("WAKE_WEEKEND");
 	if (weekend == "true") WAKE_WEEKEND = true;
 	if (weekend== "false") WAKE_WEEKEND = false;
 
@@ -23,10 +23,13 @@ void read_config(ConfigFile& cfg) {
 }
 
 void Wake::wake_mac() {
-
-	for(int i = 0; mac[i] != ""; i++) {
-		 for(int j = 0; j < packets; j++) {
-			 cout << "wakeonlan " << mac[i] << endl;
+	string wakestring;
+	for(int i = 0; MAC[i] != ""; i++) {
+		wakestring = "wakeonlan -i 192.168.255.255 ";
+		wakestring.append(MAC[i]);
+		 for(int j = 0; j < SEND_PACKETS; j++) {
+			 system(wakestring.c_str());
+			 cout << "wakeonlan " << MAC[i] << endl;
 		 }
 	}
 }
