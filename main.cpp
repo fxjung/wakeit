@@ -25,23 +25,5 @@ int main(int argc, char** argv) {
 			}
 	}
 
-	int** no_wake = cfg.read_NO_WAKE();
-		for(int i = 0; no_wake[i][0] != 0; i++) {
-			for(int j = 0; j < 6; j++) {
-				cout << no_wake[i][j] << endl;
-			}
-	}
-
-
-	---
-
-	void print_time() {
-    time_t Zeitstempel;
-    tm *nun;
-    Zeitstempel = time(0);
-    nun = localtime(&Zeitstempel);
-    cout << nun->tm_mday << '.' << nun->tm_mon+1 << '.' << nun->tm_year+1900 << " - " << nun->tm_hour << ':' << nun->tm_min << endl;
-}
-
 */
 }
