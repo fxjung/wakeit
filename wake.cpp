@@ -30,6 +30,10 @@ void Wake::wake_it(ConfigFile& cfg) {
 }
 
 void Wake::read_config(ConfigFile& cfg) {
+	string verbose = cfg.read_string("VERBOSE");
+	if (verbose == "true") VERBOSE = true;
+	if (verbose == "false") VERBOSE = false;
+
 	string weekend = cfg.read_string("WAKE_WEEKEND");
 	if (weekend == "true") WAKE_WEEKEND = true;
 	if (weekend == "false") WAKE_WEEKEND = false;
@@ -37,6 +41,7 @@ void Wake::read_config(ConfigFile& cfg) {
 	MODE = cfg.read_string("MODE");
 	WAKE = cfg.read_multi_date("WAKE");
 	NO_WAKE = cfg.read_multi_date("NO_WAKE");
+	IP = cfg.read_string("IP");
 	SEND_PACKETS = cfg.read_int("SEND_PACKETS");
 	MAC = cfg.read_multi_string("MAC");
 }
@@ -73,11 +78,14 @@ bool Wake::check_date(int** date) {
 void Wake::wake_mac() {
 	string wakestring;
 	for(int i = 0; MAC[i] != ""; i++) {
-		wakestring = "wakeonlan -i 192.168.255.255 ";
+		wakestring = "wakeonlan -i ";
+		wakestring.append(IP);
+		wakestring.append(" ");
 		wakestring.append(MAC[i]);
-		//wakestring.append(" > /dev/null");
-		 for(int j = 0; j < SEND_PACKETS; j++) {
+		if(!VERBOSE) wakestring.append(" > /dev/null");
+
+		for(int j = 0; j < SEND_PACKETS; j++) {
 			 system(wakestring.c_str());
-		 }
+		}
 	}
 }

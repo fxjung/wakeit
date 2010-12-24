@@ -17,9 +17,11 @@ class Wake {
 private:
 // tokens
 	string MODE;
+	bool VERBOSE;
 	bool WAKE_WEEKEND;
 	int** WAKE;
 	int** NO_WAKE;
+	string IP;
 	int SEND_PACKETS;
 	string* MAC;
 // time variables
