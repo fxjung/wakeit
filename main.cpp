@@ -34,8 +34,8 @@ int main(int argc, char** argv) {
 		return 0;
 
 	}
-	if(argc == 2 && argv[1][1] != '-') {
-		file = argv[1];
+	if(argc == 3 && !strcmp(argv[1], "-c")) {
+		file = argv[2];
 	}
 
 
