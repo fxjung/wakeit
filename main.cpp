@@ -1,5 +1,5 @@
 /*
- * readcfg.cpp
+ * main.cpp
  *
  *  Created on: 22.12.2010
  *      Author: Felix Jung <felix.jung@wilhelm-gym.net>
@@ -7,8 +7,8 @@
 
 #include <iostream>
 #include <cstring>
-#include "readcfg.h"
-#include "wake.h"
+#include "ConfigFile.h"
+#include "Wake.h"
 
 int main(int argc, char** argv) {
 	string file = "/etc/wakeit/wakeit.conf";
