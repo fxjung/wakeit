@@ -30,19 +30,24 @@ void Wake::wake_it(ConfigFile& cfg) {
 }
 
 void Wake::read_config(ConfigFile& cfg) {
-	string verbose = cfg.read_string("VERBOSE");
-	if (verbose == "true") VERBOSE = true;
-	if (verbose == "false") VERBOSE = false;
+	if (cfg.read_string("VERBOSE") == "true") VERBOSE = true;
+	else VERBOSE = false;
 
-	string weekend = cfg.read_string("WAKE_WEEKEND");
-	if (weekend == "true") WAKE_WEEKEND = true;
-	if (weekend == "false") WAKE_WEEKEND = false;
+	if (cfg.read_string("WAKE_WEEKEND") == "true") WAKE_WEEKEND = true;
+	else WAKE_WEEKEND = false;
 
 	MODE = cfg.read_string("MODE");
+	if(MODE == "") MODE.append("normal");
+
 	WAKE = cfg.read_multi_date("WAKE");
 	NO_WAKE = cfg.read_multi_date("NO_WAKE");
+
 	IP = cfg.read_string("IP");
+	if(IP == "") IP.append("255.255.255.255");
+
 	SEND_PACKETS = cfg.read_int("SEND_PACKETS");
+	if(SEND_PACKETS == -1) SEND_PACKETS = 1;
+
 	MAC = cfg.read_multi_string("MAC");
 }
 
