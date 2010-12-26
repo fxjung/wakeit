@@ -58,25 +58,60 @@ bool Wake::check_weekend() {
 
 bool Wake::check_date(int** date) {
 	for(int i = 0; date[i][0] != 0; i++) {
-/*		for(int j = 0; j < 6; j++) {
+
+/*		// For testing date output
+		for(int j = 0; j < 6; j++) {
 			cout << date[i][j] << " ";
 		}
 		cout << endl;
 */
+
+/*		// Old, buggy algorithm. Kept just for fun ;-)
 		if(date[i][2] < (curr_date->tm_year + 1900) && date[i][5] > (curr_date->tm_year + 1900)) return true;
 		if(date[i][2] == (curr_date->tm_year + 1900)) {
-			if(date[i][1] < (curr_date->tm_mon + 1)) return true;
+			if(date[i][1] < (curr_date->tm_mon + 1) && date[i][4] > (curr_date->tm_mon + 1)) return true;
 			if(date[i][1] == (curr_date->tm_mon + 1)) {
-				if(date[i][0] <= curr_date->tm_mday) return true;
+				if(date[i][0] <= curr_date->tm_mday && date[i][3] >= curr_date->tm_mday) return true;
 			}
 		}
-		if(date[i][5] == (curr_date->tm_year + 1900)) {
+		else if(date[i][5] == (curr_date->tm_year + 1900)) {
 			if(date[i][4] > (curr_date->tm_mon + 1)) return true;
 			if(date[i][4] == (curr_date->tm_mon + 1)) {
 				if(date[i][3] >= curr_date->tm_mday) return true;
 			}
 		}
 	}
+*/
+
+		if(date[i][2] < (curr_date->tm_year + 1900) && date[i][5] > (curr_date->tm_year + 1900)) return true;
+		if(date[i][2] == (curr_date->tm_year + 1900) && date[i][5] == (curr_date->tm_year + 1900)) {
+			if(date[i][1] < (curr_date->tm_mon + 1) && date[i][4] > (curr_date->tm_mon + 1)) return true;
+			if(date[i][1] == (curr_date->tm_mon + 1) && date[i][4] == (curr_date->tm_mon + 1)) {
+				if(date[i][0] <= curr_date->tm_mday && date[i][3] >= curr_date->tm_mday) return true;
+			}
+			else if(date[i][1] < (curr_date->tm_mon + 1) && date[i][4] == (curr_date->tm_mon + 1)) {
+				if(date[i][3] >= (curr_date->tm_mday)) return true;
+			}
+			else if(date[i][1] == (curr_date->tm_mon + 1) && date[i][4] > (curr_date->tm_mon + 1)) {
+				if(date[i][0] <= (curr_date->tm_mday)) return true;
+			}
+		}
+
+		else if(date[i][2] < (curr_date->tm_year + 1900) && date[i][5] == (curr_date->tm_year + 1900)) {
+			if(date[i][4] > (curr_date->tm_mon + 1)) return true;
+			if(date[i][4] == (curr_date->tm_mon + 1)) {
+				if(date[i][3] >= (curr_date->tm_mday)) return true;
+			}
+		}
+
+		else if(date[i][2] == (curr_date->tm_year + 1900) && date[i][5] > (curr_date->tm_year + 1900)) {
+			if(date[i][1] < (curr_date->tm_mon + 1)) return true;
+			if(date[i][1] == (curr_date->tm_mon + 1)) {
+				if(date[i][0] <= (curr_date->tm_mday)) return true;
+			}
+		}
+	}
+
 	return false;
 }
 
