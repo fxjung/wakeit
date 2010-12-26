@@ -13,7 +13,7 @@
 int main(int argc, char** argv) {
 	string file = "/etc/wakeit/wakeit.conf";
 	if(argc == 2 && !strcmp(argv[1], "--help")) {
-		cout << "Aufruf: wakeit [OPTION] [DATEI]" << endl;
+		cout << "Aufruf: wakeit [OPTION]" << endl;
 		cout << "Rechner abhaengig vom Datum per Wake-on-LAN starten." << endl << endl;
 		cout << "  -c [Datei]                       Konfigurationsdatei einlesen" << endl;
 		cout << "      --help     diese Hilfe anzeigen und beenden" << endl;
