@@ -18,8 +18,8 @@ using namespace std;
 
 class ConfigFile {
 private:
-	string file;
-	int multi_token_max;
+	string file; // Config filename
+	int multi_token_max; // Maximal number of equal tokens
 public:
 	ConfigFile(string filename, int max_multi);
 	int 	read_int(const string token);

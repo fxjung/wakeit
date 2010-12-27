@@ -19,6 +19,7 @@ ConfigFile::ConfigFile(const string filename, int max_multi) {
 	multi_token_max = max_multi;
 }
 
+// Read single integer
 int ConfigFile::read_int(const string token) {
 	ifstream config(file.c_str());
 	if(!config) {cout << "Error: Cannot open file " << file << endl; return -1;}
@@ -37,6 +38,7 @@ int ConfigFile::read_int(const string token) {
  	return -1;
 }
 
+// Read single string
 string ConfigFile::read_string(const string token) {
 	ifstream config(file.c_str());
 	if(!config) {cout << "Error: Cannot open file " << file << endl; return "";}
@@ -55,6 +57,7 @@ string ConfigFile::read_string(const string token) {
  	return "";
 }
 
+// Read multiple strings (--> MAC input)
 string* ConfigFile::read_multi_string(const string token) {
 	ifstream config(file.c_str());
 	string* multi_string = new string[multi_token_max];
@@ -76,6 +79,7 @@ string* ConfigFile::read_multi_string(const string token) {
  	return multi_string;
 }
 
+// Read multiple integer values as a date
 int** ConfigFile::read_multi_date(const string token) {
 	ifstream config(file.c_str());
 	int** multi_date = new int*[multi_token_max];

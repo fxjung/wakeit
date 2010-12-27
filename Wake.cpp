@@ -12,10 +12,12 @@
 using namespace std;
 
 Wake::Wake() {
+	// Initialize time
     timestamp = time(0);
     curr_date = localtime(&timestamp);
 }
 
+// Process the different parameters
 void Wake::wake_it(ConfigFile& cfg) {
 	read_config(cfg);
 	if(MODE == "always") {wake_mac(); return;}
@@ -29,6 +31,8 @@ void Wake::wake_it(ConfigFile& cfg) {
 	}
 }
 
+// Read the tokens and save their values in the corresponding variables
+// Define standard values
 void Wake::read_config(ConfigFile& cfg) {
 	if (cfg.read_string("VERBOSE") == "true") VERBOSE = true;
 	else VERBOSE = false;
@@ -51,11 +55,13 @@ void Wake::read_config(ConfigFile& cfg) {
 	MAC = cfg.read_multi_string("MAC");
 }
 
+// Check whether the current date is at weekend
 bool Wake::check_weekend() {
     if(curr_date->tm_wday == 0 || curr_date->tm_wday == 6) return true;
     return false;
 }
 
+// Check whether the current date is between the dates mentioned in the config
 bool Wake::check_date(int** date) {
 	for(int i = 0; date[i][0] != 0; i++) {
 
@@ -83,6 +89,7 @@ bool Wake::check_date(int** date) {
 	}
 */
 
+		// New algorithm, should work correctly
 		if(date[i][2] < (curr_date->tm_year + 1900) && date[i][5] > (curr_date->tm_year + 1900)) return true;
 		if(date[i][2] == (curr_date->tm_year + 1900) && date[i][5] == (curr_date->tm_year + 1900)) {
 			if(date[i][1] < (curr_date->tm_mon + 1) && date[i][4] > (curr_date->tm_mon + 1)) return true;
@@ -96,14 +103,12 @@ bool Wake::check_date(int** date) {
 				if(date[i][0] <= (curr_date->tm_mday)) return true;
 			}
 		}
-
 		else if(date[i][2] < (curr_date->tm_year + 1900) && date[i][5] == (curr_date->tm_year + 1900)) {
 			if(date[i][4] > (curr_date->tm_mon + 1)) return true;
 			if(date[i][4] == (curr_date->tm_mon + 1)) {
 				if(date[i][3] >= (curr_date->tm_mday)) return true;
 			}
 		}
-
 		else if(date[i][2] == (curr_date->tm_year + 1900) && date[i][5] > (curr_date->tm_year + 1900)) {
 			if(date[i][1] < (curr_date->tm_mon + 1)) return true;
 			if(date[i][1] == (curr_date->tm_mon + 1)) {
@@ -111,20 +116,18 @@ bool Wake::check_date(int** date) {
 			}
 		}
 	}
-
 	return false;
 }
 
 void Wake::wake_mac() {
 	string wakestring;
-	for(int i = 0; MAC[i] != ""; i++) {
-		wakestring = "wakeonlan -i ";
-		wakestring.append(IP);
+	for(int i = 0; MAC[i] != ""; i++) { // For every MAC do...
+		wakestring = "wakeonlan -i ";	// Wake-on-LAN command; TODO: though static - should be replaced by a user configurable string
+		wakestring.append(IP);			// Append IP-Space
 		wakestring.append(" ");
-		wakestring.append(MAC[i]);
-		if(!VERBOSE) wakestring.append(" > /dev/null");
-
-		for(int j = 0; j < SEND_PACKETS; j++) {
+		wakestring.append(MAC[i]);		// Append MAC
+		if(!VERBOSE) wakestring.append(" > /dev/null"); // Verbose? If not, put the output into /dev/null
+		for(int j = 0; j < SEND_PACKETS; j++) { // If set, send more than one packet
 			 system(wakestring.c_str());
 		}
 	}

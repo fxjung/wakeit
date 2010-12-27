@@ -11,19 +11,23 @@
 #include "Wake.h"
 
 int main(int argc, char** argv) {
+	// Standard config path
 	string file = "/etc/wakeit/wakeit.conf";
+
+	// Print program help
 	if(argc == 2 && !strcmp(argv[1], "--help")) {
 		cout << "Aufruf: wakeit [OPTION]" << endl;
 		cout << "Rechner abhaengig vom Datum per Wake-on-LAN starten." << endl << endl;
-		cout << "  -c [Datei]                       Konfigurationsdatei einlesen" << endl;
-		cout << "      --help     diese Hilfe anzeigen und beenden" << endl;
-		cout << "      --version  Versionsinformation anzeigen und beenden" << endl << endl;
+		cout << "  -c [Datei      Konfigurationsdatei einlesen" << endl;
+		cout << "  --help     diese Hilfe anzeigen und beenden" << endl;
+		cout << "  --version  Versionsinformation anzeigen und beenden" << endl << endl;
 		cout << "Standardmäßig wird in /etc/wakeit nach einer Konfigurationsdatei mit dem Namen wakeit.conf gesucht." << endl << endl;
 		cout << "Melden Sie Programmfehler bitte an <felix.jung@wilhelm-gym.net>" << endl;
 		cout << "Homepage: <http://www.wilhelm-gym.net/~felix.jung/wakeit>" << endl;
 		return 0;
-
 	}
+
+	// Print version info
 	if(argc == 2 && !strcmp(argv[1], "--version")) {
 		cout << "WakeIT 1.0 beta" << endl;
 		cout << "Copyright © 2010 Felix Jung" << endl;
@@ -32,16 +36,16 @@ int main(int argc, char** argv) {
 		cout << "Es gibt keinerlei Garantien, soweit wie es das Gesetz erlaubt." << endl << endl;
 		cout << "Geschrieben von Felix Jung." << endl;
 		return 0;
-
 	}
+
+	// Read in config filename
 	if(argc == 3 && !strcmp(argv[1], "-c")) {
 		file = argv[2];
 	}
 
-
-	ConfigFile cfg(file, 20);
+	ConfigFile cfg(file, 20); // Initialize config file
 	Wake wake;
-	wake.wake_it(cfg);
+	wake.wake_it(cfg); // Start wake process
 
 	return 0;
 }

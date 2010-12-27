@@ -16,7 +16,8 @@ using namespace std;
 
 class Wake {
 private:
-// tokens
+
+	// Tokens
 	string MODE;
 	bool VERBOSE;
 	bool WAKE_WEEKEND;
@@ -25,7 +26,8 @@ private:
 	string IP;
 	int SEND_PACKETS;
 	string* MAC;
-// time variables
+
+	// Time variables
     time_t timestamp;
     tm *curr_date;
 public:
