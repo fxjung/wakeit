@@ -4,6 +4,7 @@
  *  Created on: 23.12.2010
  *      Author: Felix Jung <felix.jung@wilhelm-gym.net>
  */
+
 #include <string>
 #include <ctime>
 #include "ConfigFile.h"

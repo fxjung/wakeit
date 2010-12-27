@@ -1,0 +1,30 @@
+		if(Start_Jahr < Aktuell_Jahr && End_Jahr > Aktuell_Jahr) return true;
+		if(Start_Jahr == Aktuell_Jahr && End_Jahr == Aktuell_Jahr) {
+			if(Start_Monat < Aktuell_Monat && End_Monat > Aktuell_Monat) return true;
+			if(Start_Monat == Aktuell_Monat && End_Monat == Aktuell_Monat) {
+				if(Start_Tag <= Aktuell_Tag && End_Tag >= Aktuell_Tag) return true;
+			}
+			else if(Start_Monat < Aktuell_Monat && End_Monat == Aktuell_Monat) {
+				if(End_Tag >= Aktuell_Tag) return true;
+			}
+			else if(Start_Monat == Aktuell_Monat && End_Monat > Aktuell_Monat) {
+				if(Start_Tag <= Aktuell_Tag) return true;
+			}
+		}
+
+		else if(Start_Jahr < Aktuell_Jahr && End_Jahr == Aktuell_Jahr) {
+			if(End_Monat > Aktuell_Monat) return true;
+			if(End_Monat == Aktuell_Monat) {
+				if(End_Tag >= Aktuell_Tag) return true;
+			}
+		}
+
+		else if(Start_Jahr == Aktuell_Jahr && End_Jahr > Aktuell_Jahr) {
+			if(Start_Monat < Aktuell_Monat) return true;
+			if(Start_Monat == Aktuell_Monat) {
+				if(Start_Tag <= Aktuell_Tag) return true;
+			}
+		}
+	}
+
+	return false;
