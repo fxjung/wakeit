@@ -28,3 +28,30 @@
 	}
 
 	return false;
+
+-----------------------------
+Erklärung:
+
+return true;	--> Datum liegt dazwischen, gibt true zurück und beendet die Ausführung des Algorithmus'
+
+return false;	--> Datum liegt nicht dazwischen, gibt false zurück und beendet die Ausführung des Algorithmus'
+
+if(Bedingung) Anweisung();
+
+if(Bedingung) {
+	Anweisung1();
+	Anweisung2();
+	Anweisung3();
+}
+
+(a == b)	--> gleich
+
+(a < b)		--> kleiner
+
+(a > b)		--> größer
+
+(a <= b)	--> kleiner gleich
+
+(a >= b)	--> größer gleich
+
+&&			--> logisches UND

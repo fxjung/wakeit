@@ -2,3 +2,4 @@ Debug
 Release
 .*.sw*
 bin
+test.conf
