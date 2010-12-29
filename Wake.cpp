@@ -23,8 +23,8 @@ void Wake::wake_it(ConfigFile& cfg) {
 	if(MODE == "always") {wake_mac(); return;}
 	if(MODE == "never") return;
 	if(MODE == "normal") {
-		if(check_date(WAKE)) {wake_mac(); return;}
-		if(check_date(NO_WAKE)) return;
+		if(is_after_start(WAKE) && is_before_end(WAKE)) {wake_mac(); return;}
+		if(is_after_start(NO_WAKE) && is_before_end(NO_WAKE)) return;
 		if(WAKE_WEEKEND && check_weekend()) {wake_mac(); return;}
 		if(!WAKE_WEEKEND && check_weekend()) return;
 		wake_mac();
@@ -61,58 +61,28 @@ bool Wake::check_weekend() {
     return false;
 }
 
-// Check whether the current date is between the dates mentioned in the config
-bool Wake::check_date(int** date) {
+// Check whether the current date is after start
+bool Wake::is_after_start(int** date) {
 	for(int i = 0; date[i][0] != 0; i++) {
-
-/*		// For testing date output
-		for(int j = 0; j < 6; j++) {
-			cout << date[i][j] << " ";
-		}
-		cout << endl;
-*/
-
-/*		// Old, buggy algorithm. Kept just for fun ;-)
-		if(date[i][2] < (curr_date->tm_year + 1900) && date[i][5] > (curr_date->tm_year + 1900)) return true;
+		if(date[i][2] < (curr_date->tm_year + 1900)) return true;
 		if(date[i][2] == (curr_date->tm_year + 1900)) {
-			if(date[i][1] < (curr_date->tm_mon + 1) && date[i][4] > (curr_date->tm_mon + 1)) return true;
+			if(date[i][1] < (curr_date->tm_mon + 1)) return true;
 			if(date[i][1] == (curr_date->tm_mon + 1)) {
-				if(date[i][0] <= curr_date->tm_mday && date[i][3] >= curr_date->tm_mday) return true;
-			}
-		}
-		else if(date[i][5] == (curr_date->tm_year + 1900)) {
-			if(date[i][4] > (curr_date->tm_mon + 1)) return true;
-			if(date[i][4] == (curr_date->tm_mon + 1)) {
-				if(date[i][3] >= curr_date->tm_mday) return true;
+				if(date[i][0] <= curr_date->tm_mday) return true;
 			}
 		}
 	}
-*/
+	return false;
+}
 
-		// New algorithm, should work correctly
-		if(date[i][2] < (curr_date->tm_year + 1900) && date[i][5] > (curr_date->tm_year + 1900)) return true;
-		if(date[i][2] == (curr_date->tm_year + 1900) && date[i][5] == (curr_date->tm_year + 1900)) {
-			if(date[i][1] < (curr_date->tm_mon + 1) && date[i][4] > (curr_date->tm_mon + 1)) return true;
-			if(date[i][1] == (curr_date->tm_mon + 1) && date[i][4] == (curr_date->tm_mon + 1)) {
-				if(date[i][0] <= curr_date->tm_mday && date[i][3] >= curr_date->tm_mday) return true;
-			}
-			else if(date[i][1] < (curr_date->tm_mon + 1) && date[i][4] == (curr_date->tm_mon + 1)) {
-				if(date[i][3] >= (curr_date->tm_mday)) return true;
-			}
-			else if(date[i][1] == (curr_date->tm_mon + 1) && date[i][4] > (curr_date->tm_mon + 1)) {
-				if(date[i][0] <= (curr_date->tm_mday)) return true;
-			}
-		}
-		else if(date[i][2] < (curr_date->tm_year + 1900) && date[i][5] == (curr_date->tm_year + 1900)) {
+// Check whether the current date is before end
+bool Wake::is_before_end(int** date) {
+	for(int i = 0; date[i][0] != 0; i++) {
+		if(date[i][5] > (curr_date->tm_year + 1900)) return true;
+		if(date[i][5] == (curr_date->tm_year + 1900)) {
 			if(date[i][4] > (curr_date->tm_mon + 1)) return true;
 			if(date[i][4] == (curr_date->tm_mon + 1)) {
-				if(date[i][3] >= (curr_date->tm_mday)) return true;
-			}
-		}
-		else if(date[i][2] == (curr_date->tm_year + 1900) && date[i][5] > (curr_date->tm_year + 1900)) {
-			if(date[i][1] < (curr_date->tm_mon + 1)) return true;
-			if(date[i][1] == (curr_date->tm_mon + 1)) {
-				if(date[i][0] <= (curr_date->tm_mday)) return true;
+				if(date[i][3] >= curr_date->tm_mday) return true;
 			}
 		}
 	}
