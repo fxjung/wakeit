@@ -1,8 +1,25 @@
 /*
- * main.cpp
+ * 	main.cpp
  *
  *  Created on: 22.12.2010
  *      Author: Felix Jung <felix.jung@wilhelm-gym.net>
+ *
+ *	Copyright (C) 2011 Felix Jung
+ *
+ *  This file is part of WakeIT.
+ *
+ *  WakeIT is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, version 3.
+ *
+ *  WakeIT is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with WakeIT.  If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
 #include <iostream>
@@ -29,9 +46,9 @@ int main(int argc, char** argv) {
 
 	// Print version info
 	if(argc == 2 && !strcmp(argv[1], "--version")) {
-		cout << "WakeIT 1.0 beta" << endl;
-		cout << "Copyright © 2010 Felix Jung" << endl;
-		cout << "Lizenz GPLv3+: GNU GPL Version 3 oder höher <http://gnu.org/licenses/gpl.html>" << endl;
+		cout << "WakeIT 1.0" << endl;
+		cout << "Copyright (C) 2011 Felix Jung" << endl;
+		cout << "Lizenz GPLv3: GNU GPL Version 3 <http://gnu.org/licenses/gpl.html>" << endl;
 		cout << "Dies ist freie Software: Sie können sie ändern und weitergeben." << endl;
 		cout << "Es gibt keinerlei Garantien, soweit wie es das Gesetz erlaubt." << endl << endl;
 		cout << "Geschrieben von Felix Jung." << endl;
