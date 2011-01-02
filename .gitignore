@@ -3,3 +3,5 @@ Release
 .*.sw*
 *.o
 wakeit
+bin
+test.conf

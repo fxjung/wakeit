@@ -1,8 +1,25 @@
 /*
- * ConfigFile.cpp
+ *  ConfigFile.cpp
  *
  *  Created on: 23.12.2010
  *      Author: Felix Jung <felix.jung@wilhelm-gym.net>
+ *
+ *	Copyright (C) 2011 Felix Jung
+ *
+ *  This file is part of WakeIT.
+ *
+ *  WakeIT is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, version 3.
+ *
+ *  WakeIT is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with WakeIT.  If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
 #include <string>
@@ -19,6 +36,7 @@ ConfigFile::ConfigFile(const string filename, int max_multi) {
 	multi_token_max = max_multi;
 }
 
+// Read single integer
 int ConfigFile::read_int(const string token) {
 	ifstream config(file.c_str());
 	if(!config) {cout << "Error: Cannot open file " << file << endl; return -1;}
@@ -37,6 +55,7 @@ int ConfigFile::read_int(const string token) {
  	return -1;
 }
 
+// Read single string
 string ConfigFile::read_string(const string token) {
 	ifstream config(file.c_str());
 	if(!config) {cout << "Error: Cannot open file " << file << endl; return "";}
@@ -55,6 +74,7 @@ string ConfigFile::read_string(const string token) {
  	return "";
 }
 
+// Read multiple strings (--> MAC input)
 string* ConfigFile::read_multi_string(const string token) {
 	ifstream config(file.c_str());
 	string* multi_string = new string[multi_token_max];
@@ -76,6 +96,7 @@ string* ConfigFile::read_multi_string(const string token) {
  	return multi_string;
 }
 
+// Read multiple integer values as a date
 int** ConfigFile::read_multi_date(const string token) {
 	ifstream config(file.c_str());
 	int** multi_date = new int*[multi_token_max];

@@ -1,8 +1,25 @@
 /*
- * main.cpp
+ * 	main.cpp
  *
  *  Created on: 22.12.2010
  *      Author: Felix Jung <felix.jung@wilhelm-gym.net>
+ *
+ *	Copyright (C) 2011 Felix Jung
+ *
+ *  This file is part of WakeIT.
+ *
+ *  WakeIT is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, version 3.
+ *
+ *  WakeIT is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with WakeIT.  If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
 #include <iostream>
@@ -43,9 +60,11 @@ void version() {
  * main
  */
 int main(int argc, char** argv) {
+	// Standard config path
 	string file = "/etc/wakeit/wakeit.conf";
   bool simulate = false;
 
+  // parse command line parameters
   for(size_t i = 1; i < argc; i++) {
     if(strcmp(argv[i], "--help") == 0) {
       usage();
@@ -70,15 +89,16 @@ int main(int argc, char** argv) {
     }
 	}
 
+  // test if conffile exists, for nicer error output
   ifstream f(file.c_str());
   if(!f) {
     cerr << "Datei " << file << " konnte nicht geöffnet werden." << endl;
     return EXIT_FAILURE;
   }
 
-	ConfigFile cfg(file, 20);
+	ConfigFile cfg(file, 20); // Initialize config file
 	Wake wake(simulate);
-	wake.wake_it(cfg);
+	wake.wake_it(cfg); // Start wake process
 
 	return 0;
 }
