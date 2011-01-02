@@ -53,7 +53,7 @@ void version() {
   cout << "Lizenz GPLv3+: GNU GPL Version 3 oder höher <http://gnu.org/licenses/gpl.html>" << endl;
   cout << "Dies ist freie Software: Sie können sie ändern und weitergeben." << endl;
   cout << "Es gibt keinerlei Garantien, soweit wie es das Gesetz erlaubt." << endl << endl;
-  cout << "Geschrieben von Felix Jung." << endl;
+  cout << "Geschrieben von Felix Jung und Roland Hieber." << endl;
 }
 
 /**
