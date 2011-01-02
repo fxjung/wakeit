@@ -57,6 +57,11 @@ int main(int argc, char** argv) {
       return EXIT_SUCCESS;
     }
     if(strcmp(argv[i], "-c") == 0) {
+      if(i+1 > argc-1) {
+        // no file given
+        usage();
+        return EXIT_FAILURE;
+      }
       file = argv[i+1];
       i++;
     }
@@ -64,6 +69,12 @@ int main(int argc, char** argv) {
       simulate = true;
     }
 	}
+
+  ifstream f(file.c_str());
+  if(!f) {
+    cerr << "Datei " << file << " konnte nicht geöffnet werden." << endl;
+    return EXIT_FAILURE;
+  }
 
 	ConfigFile cfg(file, 20);
 	Wake wake(simulate);
