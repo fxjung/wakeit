@@ -16,6 +16,7 @@ using namespace std;
 class Wake {
 private:
 // tokens
+  bool SIMULATE;
 	string MODE;
 	bool VERBOSE;
 	bool WAKE_WEEKEND;
@@ -28,7 +29,7 @@ private:
     time_t timestamp;
     tm *curr_date;
 public:
-    Wake();
+    Wake(bool simulate = false);
 	void wake_it(ConfigFile& cfg);
 	void read_config(ConfigFile& cfg);
 	bool check_weekend();

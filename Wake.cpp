@@ -11,7 +11,7 @@
 
 using namespace std;
 
-Wake::Wake() {
+Wake::Wake(bool simulate) : SIMULATE(simulate) {
     timestamp = time(0);
     curr_date = localtime(&timestamp);
 }
@@ -125,7 +125,11 @@ void Wake::wake_mac() {
 		if(!VERBOSE) wakestring.append(" > /dev/null");
 
 		for(int j = 0; j < SEND_PACKETS; j++) {
-			 system(wakestring.c_str());
+			 if(SIMULATE) {
+         cout << wakestring << endl;
+       } else {
+         system(wakestring.c_str());
+       }
 		}
 	}
 }

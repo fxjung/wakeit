@@ -60,6 +60,9 @@ int main(int argc, char** argv) {
       file = argv[i+1];
       i++;
     }
+    if(strcmp(argv[i], "-N") == 0) {
+      simulate = true;
+    }
 	}
 
 	ConfigFile cfg(file, 20);
