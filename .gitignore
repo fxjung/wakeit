@@ -5,3 +5,7 @@ Release
 wakeit
 bin
 test.conf
+*log
+debian/substvars
+debian/*substvars
+debian/files
