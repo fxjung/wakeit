@@ -1,0 +1,11 @@
+wakeit (0.99.1) testing; urgency=low
+
+  * delete VCS dirs
+
+ -- Roland Hieber <rohieb@rohieb.name>  Mon, 03 Jan 2011 05:32:21 +0100
+
+wakeit (0.99.0) testing; urgency=low
+
+  * Initial release: 1.0 beta
+
+ -- Roland Hieber <rohieb@rohieb.name>  Mon, 03 Jan 2011 05:02:06 +0100

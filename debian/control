@@ -1,0 +1,13 @@
+Source: wakeit
+Section: admin
+Priority: extra
+Maintainer: Roland Hieber <rohieb@rohieb.name>
+Build-Depends: debhelper
+
+Package: wakeit
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, wakeonlan
+Description: Start computers via Wake on LAN on certain days
+ WakeIT allows you to start computers via Wake on LAN, but it can be configured
+ on which days the computers should be started. It reads the dates from a config file, and is mostly useful in conjunction with cron(8) to start computers 
+ daily, weekly, etc.
