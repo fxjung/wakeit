@@ -35,7 +35,7 @@ using namespace std;
 
 class ConfigFile {
 private:
-	string file; // Config filename
+	string conffile; // Config filename
 	int multi_token_max; // Maximal number of equal tokens
 public:
 	ConfigFile(string filename, int max_multi);

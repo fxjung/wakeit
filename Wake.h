@@ -33,9 +33,10 @@ using namespace std;
 
 class Wake {
 private:
-  bool SIMULATE;
+	string logfile; // logfile name
+	bool SIMULATE;
 
-	// Tokens
+	// tokens
 	string MODE;
 	bool VERBOSE;
 	bool WAKE_WEEKEND;
@@ -49,7 +50,7 @@ private:
     time_t timestamp;
     tm *curr_date;
 public:
-    Wake(bool simulate = false);
+    Wake(string filename, bool simulate = false);
 	void wake_it(ConfigFile& cfg);
 	void read_config(ConfigFile& cfg);
 	bool check_weekend();

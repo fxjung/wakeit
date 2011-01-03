@@ -33,13 +33,15 @@ using namespace std;
  * print usage
  */
 void usage() {
-  cout << "Aufruf: wakeit [OPTION]" << endl;
+  cout << "Aufruf: wakeit [OPTION]..." << endl;
   cout << "Rechner abhängig vom Datum per Wake-on-LAN starten." << endl << endl;
-  cout << "  -c [Datei]                       Konfigurationsdatei einlesen" << endl;
-  cout << "      --help     diese Hilfe anzeigen und beenden" << endl;
-  cout << "      --version  Versionsinformation anzeigen und beenden" << endl;
-  cout << "  -N             Nichts tun, nur simulieren." << endl << endl;
-  cout << "Standardmäßig wird in /etc/wakeit nach einer Konfigurationsdatei mit dem Namen wakeit.conf gesucht." << endl << endl;
+  cout << "  -c [Datei]     Konfigurationsdatei einlesen." << endl;
+  cout << "  -l [Datei]     Logdatei spezifizieren." << endl;
+  cout << "  -N             Nichts tun, nur simulieren." << endl;
+  cout << "      --help     diese Hilfe anzeigen und beenden." << endl;
+  cout << "      --version  Versionsinformation anzeigen und beenden." << endl << endl;
+  cout << "Standardmäßig wird in /etc/wakeit nach einer Konfigurationsdatei mit dem Namen wakeit.conf gesucht." << endl;
+  cout << "Außerdem wird in /var/log/wakeit.log ein Logfile geschrieben." << endl << endl;
   cout << "Melden Sie Programmfehler bitte an <felix.jung@wilhelm-gym.net>" << endl;
   cout << "Homepage: <http://www.wilhelm-gym.net/~felix.jung/wakeit>" << endl;
 }
@@ -60,9 +62,10 @@ void version() {
  * main
  */
 int main(int argc, char** argv) {
-	// Standard config path
-	string file = "/etc/wakeit/wakeit.conf";
-  bool simulate = false;
+	// Standard config and log path
+	string conffile = "/etc/wakeit/wakeit.conf";
+	string logfile = "/var/log/wakeit.log";
+  	bool simulate = false;
 
   // parse command line parameters
   for(size_t i = 1; i < argc; i++) {
@@ -81,7 +84,16 @@ int main(int argc, char** argv) {
         usage();
         return EXIT_FAILURE;
       }
-      file = argv[i+1];
+      conffile = argv[i+1];
+      i++;
+    }
+    if(strcmp(argv[i], "-l") == 0) {
+      if(i+1 > argc-1) {
+        // no file given
+        usage();
+        return EXIT_FAILURE;
+      }
+      logfile = argv[i+1];
       i++;
     }
     if(strcmp(argv[i], "-N") == 0) {
@@ -90,14 +102,21 @@ int main(int argc, char** argv) {
 	}
 
   // test if conffile exists, for nicer error output
-  ifstream f(file.c_str());
-  if(!f) {
-    cerr << "Datei " << file << " konnte nicht geöffnet werden." << endl;
+  ifstream cf(conffile.c_str());
+  if(!cf) {
+    cerr << "Datei " << conffile << " konnte nicht geöffnet werden." << endl;
     return EXIT_FAILURE;
   }
 
-	ConfigFile cfg(file, 20); // Initialize config file
-	Wake wake(simulate);
+  ofstream lf;
+  lf.open(logfile.c_str(), ios::app);	// create / open logfile...
+  if(!lf) {
+    cerr << "Datei " << logfile << " konnte nicht geschrieben werden." << endl;
+    return EXIT_FAILURE;
+  }
+
+	ConfigFile cfg(conffile, 20); // Initialize config file
+	Wake wake(logfile, simulate);
 	wake.wake_it(cfg); // Start wake process
 
 	return 0;

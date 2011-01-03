@@ -31,15 +31,12 @@
 
 using namespace std;
 
-ConfigFile::ConfigFile(const string filename, int max_multi) {
-	file = filename;
-	multi_token_max = max_multi;
-}
+ConfigFile::ConfigFile(const string filename, int max_multi) : conffile(filename), multi_token_max(max_multi) {}
 
 // Read single integer
 int ConfigFile::read_int(const string token) {
-	ifstream config(file.c_str());
-	if(!config) {cout << "Error: Cannot open file " << file << endl; return -1;}
+	ifstream config(conffile.c_str());
+	if(!config) {cout << "Error: Cannot open file " << conffile << endl; return -1;}
 
 	while(!config.eof()) {
     	char buf[100] = {0};
@@ -57,8 +54,8 @@ int ConfigFile::read_int(const string token) {
 
 // Read single string
 string ConfigFile::read_string(const string token) {
-	ifstream config(file.c_str());
-	if(!config) {cout << "Error: Cannot open file " << file << endl; return "";}
+	ifstream config(conffile.c_str());
+	if(!config) {cout << "Error: Cannot open file " << conffile << endl; return "";}
 
 	while(!config.eof()) {
     	char buf[100] = {0};
@@ -76,10 +73,10 @@ string ConfigFile::read_string(const string token) {
 
 // Read multiple strings (--> MAC input)
 string* ConfigFile::read_multi_string(const string token) {
-	ifstream config(file.c_str());
+	ifstream config(conffile.c_str());
 	string* multi_string = new string[multi_token_max];
 	for(int i = 0; i < multi_token_max; i++) multi_string[i] = "";
-	if(!config) {cout << "Error: Cannot open file " << file << endl; return multi_string;}
+	if(!config) {cout << "Error: Cannot open file " << conffile << endl; return multi_string;}
 	int number = 0;
 
 	for (int i = 0; !config.eof(); i++) {
@@ -98,7 +95,7 @@ string* ConfigFile::read_multi_string(const string token) {
 
 // Read multiple integer values as a date
 int** ConfigFile::read_multi_date(const string token) {
-	ifstream config(file.c_str());
+	ifstream config(conffile.c_str());
 	int** multi_date = new int*[multi_token_max];
 	for(int i = 0; i < multi_token_max; i++) multi_date[i] = new int[6];
 	for(int i = 0; i < multi_token_max; i++) {
@@ -106,7 +103,7 @@ int** ConfigFile::read_multi_date(const string token) {
 			multi_date[i][j] = 0;
 		}
 	}
-	if(!config) {cout << "Error: Cannot open file " << file << endl; return multi_date;}
+	if(!config) {cout << "Error: Cannot open file " << conffile << endl; return multi_date;}
 	int number = 0;
 
 	for (int i = 0; !config.eof(); i++) {
