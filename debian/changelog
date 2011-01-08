@@ -1,3 +1,12 @@
+wakeit (1.2) testing; urgency=low
+
+  [ Felix Jung ]
+  * Fixed bug in Wake::wake_it where only the first WAKE/NO_WAKE would be 
+    respected
+  * Fixed logfile date output.
+
+ -- Roland Hieber <rohieb@rohieb.name>  Sat, 08 Jan 2011 16:46:28 +0100
+
 wakeit (1.1) testing; urgency=low
 
   * default config in /etc/wakeit.conf, per Debian policy, chapter
