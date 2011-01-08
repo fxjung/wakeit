@@ -111,14 +111,17 @@ bool Wake::is_before_end(int** date, int i) {
 
 void Wake::wake_mac() {
 	string wakestring;
-
+	char buffer[25] = {0};
 	ofstream log;
 	log.open(logfile.c_str(), ios::app);
+	
 	// write timestamp
-	log << curr_date->tm_hour << ':' << curr_date->tm_min << ':' << curr_date->tm_sec << '\t' << curr_date->tm_mday << '-' << curr_date->tm_mon+1 << '-' << curr_date->tm_year+1900 << "\tWake up ";
+	strftime(buffer, 25, "%Y-%m-%d   %H:%M:%S", curr_date);
+	log << buffer << "\tWake up ";
+	
 	// log whether simulation is enabled
 	if(SIMULATE) log << "simulated\t";
-	else log << "\t\t";
+	else log << "\t\t\t";
 
 	for(int i = 0; MAC[i] != ""; i++) { // for every MAC do...
 		wakestring = "wakeonlan -i ";	// wake-on-LAN command; TODO: though static - should be replaced by a user configurable string
