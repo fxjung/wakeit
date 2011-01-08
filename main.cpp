@@ -40,7 +40,7 @@ void usage() {
   cout << "  -N             Nichts tun, nur simulieren." << endl;
   cout << "      --help     diese Hilfe anzeigen und beenden." << endl;
   cout << "      --version  Versionsinformation anzeigen und beenden." << endl << endl;
-  cout << "Standardmäßig wird in /etc/wakeit nach einer Konfigurationsdatei mit dem Namen wakeit.conf gesucht." << endl;
+  cout << "Standardmäßig wird in /etc/ nach einer Konfigurationsdatei mit dem Namen wakeit.conf gesucht." << endl;
   cout << "Außerdem wird in /var/log/wakeit.log ein Logfile geschrieben." << endl << endl;
   cout << "Melden Sie Programmfehler bitte an <felix.jung@wilhelm-gym.net>" << endl;
   cout << "Homepage: <http://www.wilhelm-gym.net/~felix.jung/wakeit>" << endl;
@@ -63,7 +63,7 @@ void version() {
  */
 int main(int argc, char** argv) {
 	// Standard config and log path
-	string conffile = "/etc/wakeit/wakeit.conf";
+	string conffile = "/etc/wakeit.conf";
 	string logfile = "/var/log/wakeit.log";
   	bool simulate = false;
 
