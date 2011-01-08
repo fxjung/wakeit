@@ -54,8 +54,8 @@ public:
 	void wake_it(ConfigFile& cfg);
 	void read_config(ConfigFile& cfg);
 	bool check_weekend();
-	bool is_after_start(int** date);
-	bool is_before_end(int** date);
+	bool is_after_start(int** date, int i);
+	bool is_before_end(int** date, int i);
 	void wake_mac();
 };
 

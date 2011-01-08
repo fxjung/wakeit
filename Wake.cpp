@@ -40,8 +40,15 @@ void Wake::wake_it(ConfigFile& cfg) {
 	if(MODE == "always") {wake_mac(); return;}
 	if(MODE == "never") return;
 	if(MODE == "normal") {
-		if(is_after_start(WAKE) && is_before_end(WAKE)) {wake_mac(); return;}
-		if(is_after_start(NO_WAKE) && is_before_end(NO_WAKE)) return;
+		// for each found token check whether date is between start and end 
+		for(int i = 0; WAKE[i][0] != 0; i++) {
+			if(is_after_start(WAKE, i) && is_before_end(WAKE, i)) {wake_mac(); return;}
+		}
+		// the same for "NO_WAKE"
+		for(int i = 0; NO_WAKE[i][0] != 0; i++) {
+			if(is_after_start(NO_WAKE, i) && is_before_end(NO_WAKE, i)) return;
+		}
+		
 		if(WAKE_WEEKEND && check_weekend()) {wake_mac(); return;}
 		if(!WAKE_WEEKEND && check_weekend()) return;
 		wake_mac();
@@ -79,28 +86,24 @@ bool Wake::check_weekend() {
 }
 
 // check whether the current date is after start
-bool Wake::is_after_start(int** date) {
-	for(int i = 0; date[i][0] != 0; i++) {
-		if(date[i][2] < (curr_date->tm_year + 1900)) return true;
-		if(date[i][2] == (curr_date->tm_year + 1900)) {
-			if(date[i][1] < (curr_date->tm_mon + 1)) return true;
-			if(date[i][1] == (curr_date->tm_mon + 1)) {
-				if(date[i][0] <= curr_date->tm_mday) return true;
-			}
+bool Wake::is_after_start(int** date, int i) {
+	if(date[i][2] < (curr_date->tm_year + 1900)) return true;
+	if(date[i][2] == (curr_date->tm_year + 1900)) {
+		if(date[i][1] < (curr_date->tm_mon + 1)) return true;
+		if(date[i][1] == (curr_date->tm_mon + 1)) {
+			if(date[i][0] <= curr_date->tm_mday) return true;
 		}
 	}
 	return false;
 }
 
 // check whether the current date is before end
-bool Wake::is_before_end(int** date) {
-	for(int i = 0; date[i][0] != 0; i++) {
-		if(date[i][5] > (curr_date->tm_year + 1900)) return true;
-		if(date[i][5] == (curr_date->tm_year + 1900)) {
-			if(date[i][4] > (curr_date->tm_mon + 1)) return true;
-			if(date[i][4] == (curr_date->tm_mon + 1)) {
-				if(date[i][3] >= curr_date->tm_mday) return true;
-			}
+bool Wake::is_before_end(int** date, int i) {
+	if(date[i][5] > (curr_date->tm_year + 1900)) return true;
+	if(date[i][5] == (curr_date->tm_year + 1900)) {
+		if(date[i][4] > (curr_date->tm_mon + 1)) return true;
+		if(date[i][4] == (curr_date->tm_mon + 1)) {
+			if(date[i][3] >= curr_date->tm_mday) return true;
 		}
 	}
 	return false;
