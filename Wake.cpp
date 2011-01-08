@@ -46,11 +46,20 @@ void Wake::wake_it(ConfigFile& cfg) {
 		}
 		// the same for "NO_WAKE"
 		for(int i = 0; NO_WAKE[i][0] != 0; i++) {
-			if(is_after_start(NO_WAKE, i) && is_before_end(NO_WAKE, i)) return;
+			if(is_after_start(NO_WAKE, i) && is_before_end(NO_WAKE, i)) {
+				ofstream log;
+				log.open(logfile.c_str(), ios::app);
+				log << curr_date->tm_hour << ':' << curr_date->tm_min << ':' << curr_date->tm_sec << '\t' << curr_date->tm_mday << '-' << curr_date->tm_mon+1 << '-' << curr_date->tm_year+1900 << "\tDon't wake, it's a NO_WAKE period" << endl;
+				return;
+			}
 		}
-		
 		if(WAKE_WEEKEND && check_weekend()) {wake_mac(); return;}
-		if(!WAKE_WEEKEND && check_weekend()) return;
+		if(!WAKE_WEEKEND && check_weekend()) {
+			ofstream log;
+			log.open(logfile.c_str(), ios::app);
+			log << curr_date->tm_hour << ':' << curr_date->tm_min << ':' << curr_date->tm_sec << '\t' << curr_date->tm_mday << '-' << curr_date->tm_mon+1 << '-' << curr_date->tm_year+1900 << "\tDon't wake, it's weekend" << endl;
+			return;
+		}
 		wake_mac();
 	}
 }
@@ -137,3 +146,5 @@ void Wake::wake_mac() {
 	}
 	log << endl;
 }
+
+// vim:noexpandtab:

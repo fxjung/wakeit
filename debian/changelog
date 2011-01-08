@@ -1,3 +1,20 @@
+wakeit (1.1) testing; urgency=low
+
+  * default config in /etc/wakeit.conf, per Debian policy, chapter
+    10.7.2
+  * log when we do not wake
+
+ -- Roland Hieber <rohieb@rohieb.name>  Sat, 08 Jan 2011 02:43:47 +0100
+
+wakeit (1.0) testing; urgency=low
+
+  [ Felix Jung ]
+  * Updated "written by".
+  * Removed beta status
+  * Added logfile feature.
+
+ -- Roland Hieber <rohieb@rohieb.name>  Sat, 08 Jan 2011 00:57:20 +0100
+
 wakeit (0.99.1) testing; urgency=low
 
   * delete VCS dirs
