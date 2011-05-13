@@ -32,11 +32,11 @@ using namespace std;
 /**
  * some versioning stuff (nice c++ constants, not those ugly c-preprocessor definitions^^)
  */
-const string version_string = "WakeIT 1.0";
-const string copyright_string = "Copyright (C) 2010 Felix Jung";
-const string credits_string =  "Geschrieben von Felix Jung und Roland Hieber.";
-const string email_string = "felix.jung@wilhelm-gym.net";
-const string homepage_string = "http://www.wilhelm-gym.net/~felix.jung/wakeit";
+const string version = "WakeIT 1.0";
+const string copyright = "Copyright (C) 2010 Felix Jung";
+const string credits =  "Geschrieben von Felix Jung und Roland Hieber.";
+const string email = "felix.jung@wilhelm-gym.net";
+const string homepage = "http://www.wilhelm-gym.net/~felix.jung/wakeit";
 
 /**
  * print usage
@@ -51,20 +51,20 @@ void usage() {
   cout << "      --version  Versionsinformation anzeigen und beenden." << endl << endl;
   cout << "Standardmäßig wird in /etc/ nach einer Konfigurationsdatei mit dem Namen wakeit.conf gesucht." << endl;
   cout << "Außerdem wird in /var/log/wakeit.log ein Logfile geschrieben." << endl << endl;
-  cout << "Melden Sie Programmfehler bitte an <" << email_string << ">" << endl;
-  cout << "Homepage: <" << homepage_string << ">" << endl;
+  cout << "Melden Sie Programmfehler bitte an <" << email << ">" << endl;
+  cout << "Homepage: <" << homepage << ">" << endl;
 }
 
 /**
  * print version
  */
 void version() {
-  cout << version_string << endl;
-  cout << copyright_string << endl;
+  cout << version << endl;
+  cout << copyright << endl;
   cout << "Lizenz GPLv3: GNU GPL Version 3 <http://gnu.org/licenses/gpl.html>" << endl;
   cout << "Dies ist freie Software: Sie können sie ändern und weitergeben." << endl;
   cout << "Es gibt keinerlei Garantien, soweit wie es das Gesetz erlaubt." << endl << endl;
-  cout << credits_string << endl;
+  cout << credits << endl;
 }
 
 /**
