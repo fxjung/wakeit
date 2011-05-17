@@ -32,8 +32,8 @@ using namespace std;
 /**
  * some versioning stuff (nice c++ constants, not those ugly c-preprocessor definitions^^)
  */
-const string version_string = "WakeIT 1.0";
-const string copyright_string = "Copyright (C) 2010 Felix Jung";
+const string version_string = "WakeIT 1.3";
+const string copyright_string = "Copyright (C) 2011 Felix Jung";
 const string credits_string =  "Geschrieben von Felix Jung und Roland Hieber.";
 const string email_string = "felix.jung@wilhelm-gym.net";
 const string homepage_string = "http://www.wilhelm-gym.net/~felix.jung/wakeit";
