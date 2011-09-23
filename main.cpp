@@ -124,7 +124,7 @@ int main(int argc, char** argv) {
     return EXIT_FAILURE;
   }
 
-	ConfigFile cfg(conffile, 20); // Initialize config file
+	ConfigFile cfg(conffile, 60); // Initialize config file
 	Wake wake(logfile, simulate);
 	wake.wake_it(cfg); // Start wake process
 
