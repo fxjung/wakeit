@@ -1,3 +1,9 @@
+wakeit (1.4) testing; urgency=low
+
+  * Raised multi_token_max limit
+
+ -- Felix Jung <felix.jung@wilhelm-gym.net>  Sun, 25 Sep 2011 11:15:39 +0200
+
 wakeit (1.3) testing; urgency=low
 
   * fixed logfile date output
